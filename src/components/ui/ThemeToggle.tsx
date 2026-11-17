@@ -23,7 +23,11 @@ export function ThemeToggle() {
 
   return (
     <button
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      // Static until mounted so SSR and the first client render match
+      // (resolvedTheme is only known after hydration).
+      aria-label={
+        mounted ? (isDark ? "Switch to light theme" : "Switch to dark theme") : "Toggle theme"
+      }
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-line text-muted transition-colors duration-300 hover:border-accent hover:text-accent"
     >
